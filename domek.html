@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domek Aurela</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #111;
+      color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }.container {
+  background: #222;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+}
+
+h1 {
+  color: #ff4444;
+}
+
+#accessSection, #secretSection {
+  margin-top: 2rem;
+}
+
+input[type="password"], textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 80%;
+  margin: 10px auto;
+  display: block;
+  font-size: 1rem;
+}
+
+button {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background: #ff5e5e;
+}
+
+.burning {
+  animation: burn 1s ease-in-out;
+  background: orange;
+  box-shadow: 0 0 15px orange;
+}
+
+@keyframes burn {
+  0% { background: #f44336; box-shadow: none; }
+  50% { background: orange; box-shadow: 0 0 10px orange; }
+  100% { background: #f44336; box-shadow: none; }
+}
+
+#confirmation {
+  margin-top: 1rem;
+  color: #ffcc00;
+  font-style: italic;
+}
+
+#storedMessage {
+  margin-top: 2rem;
+  background: #333;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #ccc;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Domek Aurela</h1>
+    <div id="accessSection">
+      <p>Wpisz hasło, by wejść do tajnej sekcji:</p>
+      <input type="password" id="passwordInput" placeholder="Hasło..." />
+      <button onclick="checkPassword()">Wejdź</button>
+    </div><div id="secretSection" style="display: none;">
+  <h2>🗝️ Tajna Wiadomość</h2>
+  <textarea id="messageInput" rows="5" placeholder="Zostaw wiadomość dla Aurela..."></textarea>
+  <button id="sendBtn" onclick="sendMessage()">Zostaw Wiadomość</button>
+  <p id="confirmation"></p>
+  <div id="storedMessage"></div>
+</div>
+
+  </div>  <script>
+    const correctPassword = "Aurel2025";
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === correctPassword) {
+        document.getElementById("accessSection").style.display = "none";
+        document.getElementById("secretSection").style.display = "block";
+        loadMessage();
+      } else {
+        alert("Nieprawidłowe hasło!");
+      }
+    }
+
+    function sendMessage() {
+      const message = document.getElementById("messageInput").value;
+      if (message.trim() !== "") {
+        localStorage.setItem("tajnaWiadomosc", message);
+        document.getElementById("confirmation").innerText = "Wiadomość została zapisana.";
+        const btn = document.getElementById("sendBtn");
+        btn.classList.add("burning");
+        setTimeout(() => btn.classList.remove("burning"), 1000);
+        loadMessage();
+      }
+    }
+
+    function loadMessage() {
+      const msg = localStorage.getItem("tajnaWiadomosc");
+      if (msg) {
+        document.getElementById("storedMessage").innerText = `📜 Twoja wiadomość: \n"${msg}"`;
+      }
+    }
+  </script></body>
+</html>
