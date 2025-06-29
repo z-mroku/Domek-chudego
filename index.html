@@ -110,6 +110,31 @@
     }
   </style>
 </head>
+  <section id="tajne-wiadomosci" style="display:none; background: rgba(0, 0, 0, 0.8); padding: 2rem; border-radius: 20px; margin: 2rem auto; max-width: 800px; color: #f1f1f1;">
+  <h2 style="color: #ffcc00;">📥 Tajne Wiadomości</h2>
+  <pre id="wiadomosci-box" style="white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 10px; border: 1px solid #555;"></pre>
+</section>
+
+<div style="text-align:center; margin: 2rem;">
+  <button onclick="pokazWiadomosci()" style="padding: 0.8rem 2rem; font-size: 1.1rem; background: #f44336; color: white; border: none; border-radius: 10px;">📂 Odsłoń Tajne Wiadomości</button>
+</div>
+
+<script>
+function pokazWiadomosci() {
+  document.getElementById('tajne-wiadomosci').style.display = 'block';
+  fetch('https://raw.githubusercontent.com/z-mroku/Domek-chudego/main/wiadomosci.txt')
+    .then(response => {
+      if (!response.ok) throw new Error('Nie udało się pobrać wiadomości.');
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById('wiadomosci-box').innerText = data;
+    })
+    .catch(error => {
+      document.getElementById('wiadomosci-box').innerText = 'Brak wiadomości lub błąd podczas pobierania.';
+    });
+}
+</script>
 <body>
   <button class="toggle-theme" onclick="toggleTheme()">🌙 / ☀️</button>
 
