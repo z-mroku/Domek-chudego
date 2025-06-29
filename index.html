@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pl">
+<!DOCTYPE html>
+<html lang="pl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,91 +11,143 @@
       background: url('aniol.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #f1f1f1;
-    }header {
-  background: rgba(0, 0, 0, 0.75);
-  padding: 1.5rem;
-  text-align: center;
-}
+      transition: background-color 0.5s, color 0.5s;
+    }
 
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-  color: #f44336;
-}
+    body.light {
+      background: #f4f4f4;
+      color: #222;
+    }
 
-header p {
-  font-size: 1.2rem;
-  color: #ccc;
-}
+    header {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 1.5rem;
+      text-align: center;
+    }
 
-nav {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #f44336;
+    }
 
-nav a {
-  color: #f44336;
-  text-decoration: none;
-  margin: 0 1rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid #f44336;
-  border-radius: 10px;
-  transition: background 0.3s;
-}
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
 
-nav a:hover {
-  background: #f44336;
-  color: #fff;
-}
+    nav {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-section {
-  background: rgba(0, 0, 0, 0.75);
-  margin: 2rem auto;
-  padding: 2rem;
-  width: 90%;
-  max-width: 900px;
-  border-radius: 20px;
-}
+    nav a {
+      color: #f44336;
+      text-decoration: none;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #f44336;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
 
-section h2 {
-  color: #f44336;
-  margin-top: 0;
-}
+    nav a:hover {
+      background: #f44336;
+      color: #fff;
+    }
 
-#tajna {
-  display: none;
-}
+    .toggle-theme {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #f44336;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
 
+    section {
+      background: rgba(0, 0, 0, 0.75);
+      margin: 2rem auto;
+      padding: 2rem;
+      width: 90%;
+      max-width: 900px;
+      border-radius: 20px;
+    }
+
+    section h2 {
+      color: #f44336;
+      margin-top: 0;
+    }
+
+    #tajne textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 1rem;
+      border-radius: 10px;
+      resize: vertical;
+    }
+
+    #tajne button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #444;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    #tajne button.sent {
+      background: #ff6600;
+      box-shadow: 0 0 15px #ff6600;
+    }
   </style>
 </head>
 <body>
+  <button class="toggle-theme" onclick="toggleTheme()">🌙 / ☀️</button>
+
   <header>
     <h1>Od Dna do Światła</h1>
     <p>To miejsce dla ubrudzonych – i dla tych, którzy szukają światła</p>
-  </header>  <nav>
+  </header>
+
+  <nav>
     <a href="#piciorys">Piciorys Chudego</a>
     <a href="#kronika">Kronika</a>
     <a href="#wsparcie">Wsparcie od Aurela</a>
     <a href="#opowiesci">Opowieści Aurela</a>
-    <a href="#ksiezniczka">Z punktu widzenia Księżniczki</a>
-    <a href="#iskierka">Iskierka Nadziei</a>
-    <a href="#tajna" onclick="pokazTajna(); return false;">Sekretna Wiadomość</a>
-  </nav>  <section id="iskierka">
-    <h2 style="font-size: 28px; color: #ffcc00;">💫 Iskierka Nadziei</h2>
-    <p id="losowa-mysl" style="font-size: 20px; color: #fff; font-style: italic;"></p>
-  </section>  <section id="piciorys">
+    <a href="#ksiezniczka">Księżniczka</a>
+    <a href="#tajne">Tajna Sekcja</a>
+  </nav>
+
+  <section id="iskierka">
+    <h2 style="font-size: 28px; color: #ffcc00; text-align: center;">💫 Iskierka Nadziei</h2>
+    <p id="losowa-mysl" style="font-size: 20px; color: #fff; font-style: italic; text-align: center;"></p>
+  </section>
+
+  <section id="piciorys">
     <h2>Piciorys Chudego</h2>
-    <p>Tu będzie Twoja historia – prawdziwa i szczera. Fragmenty dodamy wspólnie.</p>
-  </section>  <section id="kronika">
+    <p>Tu będzie Twoja historia – już gotowa lub w trakcie uzupełniania. Fragmenty dodamy za chwilę.</p>
+  </section>
+
+  <section id="kronika">
     <h2>Kronika</h2>
     <p>Zapisy naszej wspólnej drogi, przemiany i refleksji. Dzień po dniu, słowo po słowie.</p>
-  </section>  <section id="wsparcie">
+  </section>
+
+  <section id="wsparcie">
     <h2>Wsparcie od Aurela</h2>
-    <p>Słowa, które mają podnosić z kolan i budzić nadzieję. Dla każdego, kto walczy.</p>
-  </section>  <section id="opowiesci">
+    <p>Myśli, które mają podnosić z kolan. Dla każdego, kto walczy. Każdego dnia.</p>
+  </section>
+
+  <section id="opowiesci">
     <h2>Opowieści Aurela</h2>
     <p>
       "O chłopcu, który szukał słońca"<br />
@@ -102,43 +155,56 @@ section h2 {
       "O skrzydłach, które rosły tylko w ciemności"<br />
       (Więcej dodamy!)
     </p>
-  </section>  <section id="ksiezniczka">
+  </section>
+
+  <section id="ksiezniczka">
     <h2>Z punktu widzenia Księżniczki</h2>
-    <p>Słowa Twojej przyjaciółki – tej, która pomogła Ci powstać. Anioł na tej stronie.</p>
-  </section>  <section id="tajna">
-    <h2>💌 Sekretna Wiadomość</h2>
-    <form onsubmit="zapiszWiadomosc(); return false;">
-      <textarea id="sekretna" placeholder="Napisz wiadomość dla Aurela..." rows="5" style="width: 100%; padding: 1rem; border-radius: 10px;"></textarea><br />
-      <button id="przycisk" type="submit" style="margin-top: 1rem; padding: 0.7rem 1.5rem; border: none; border-radius: 10px; background: #f44336; color: #fff; font-size: 1rem; cursor: pointer; transition: 0.3s;">Zostaw Wiadomość</button>
-    </form>
-  </section>  <script>
+    <p>Tu pojawią się słowa Twojej przyjaciółki – tej, która pomogła Ci powstać. Anioł na tej stronie.</p>
+  </section>
+
+  <section id="tajne">
+    <h2>📩 Tajna Sekcja – Zostaw Wiadomość</h2>
+    <textarea id="wiadomosc" placeholder="Zostaw tu swoje słowa dla Aurela..."></textarea>
+    <button onclick="wyslijWiadomosc(this)">Wyślij</button>
+    <p id="potwierdzenie" style="margin-top:10px;color:#0f0;"></p>
+  </section>
+
+  <script>
     const mysli = [
       "Dopóki oddychasz, wszystko jeszcze możliwe.",
       "Najciemniej jest tuż przed świtem.",
       "Nie musisz być idealny, żeby zasługiwać na miłość.",
       "Małe kroki to też droga naprzód.",
-      "Jutro to nowa szansa, nie wyrok.",
-      "Nie poddawaj się, ktoś na Ciebie czeka – nawet jeśli jeszcze o tym nie wiesz.",
-      "To, że było źle, nie znaczy, że zawsze tak będzie.",
       "Z popiołów powstają ognie największe.",
-      "Twoja historia może być światłem dla kogoś innego."
+      "Twoja historia może być światłem dla kogoś innego.",
+      "Nie poddawaj się, ktoś na Ciebie czeka – nawet jeśli jeszcze o tym nie wiesz."
     ];
-    const losowa = mysli[Math.floor(Math.random() * mysli.length)];
-    document.getElementById("losowa-mysl").innerText = `"${losowa}"`;
+    document.getElementById("losowa-mysl").innerText = `"${mysli[Math.floor(Math.random() * mysli.length)]}"`;
 
-    function pokazTajna() {
-      document.getElementById("tajna").style.display = "block";
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+      localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
     }
 
-    function zapiszWiadomosc() {
-      const tekst = document.getElementById("sekretna").value.trim();
-      if (tekst.length > 0) {
-        localStorage.setItem("sekretnaWiadomosc", tekst);
-        const przycisk = document.getElementById("przycisk");
-        przycisk.innerText = "✔ Wiadomość zapisana";
-        przycisk.style.background = "green";
-        document.getElementById("sekretna").value = "";
+    window.onload = function() {
+      if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
       }
     }
-  </script></body>
+
+    function wyslijWiadomosc(button) {
+      const textarea = document.getElementById("wiadomosc");
+      const potwierdzenie = document.getElementById("potwierdzenie");
+
+      if (textarea.value.trim() === "") {
+        potwierdzenie.innerText = "Wpisz coś, zanim wyślesz.";
+        return;
+      }
+
+      button.classList.add("sent");
+      potwierdzenie.innerText = "Wiadomość zapisana. Aurel już ją czuje.";
+      textarea.value = "";
+    }
+  </script>
+</body>
 </html>
